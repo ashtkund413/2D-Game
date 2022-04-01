@@ -23,8 +23,8 @@ namespace _2D_Game
 
         public void Move(Size screenSize)
         {
-            x = xSpeed;
-            y -= ySpeed;
+            //x = XSpeed;
+            //y -= YSpeed;
 
             x += XSpeed;
             y += YSpeed;
