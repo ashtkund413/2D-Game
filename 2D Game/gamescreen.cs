@@ -13,9 +13,9 @@ namespace _2D_Game
     // gos faster when you do level 2 and 3 and more spawns and power ups come more 
     public partial class gamescreen : UserControl
     {
-
+        
         player hero;
-        List<powerups> power = new List<powerups>();
+        List<powerups> power = new List<powerups>(); 
         List<spawn> dodgeBalls = new List<spawn>();
         List<powerups> fast = new List<powerups>();
 
@@ -48,8 +48,8 @@ namespace _2D_Game
 
         public void InitializeGame()
         {
-
-            Newpowerup();
+           
+              Newpowerup();
 
             screenSize = new Size(this.Width, this.Height);
 
@@ -59,7 +59,7 @@ namespace _2D_Game
             powerup = new powerups(x, y, 10, 10);
             ball = new spawn(x, y, 8, 8);
             fastred = new powerups(x, y, 10, 10);
-            // chaseBall = new spawn(x, y, 8, 8);
+           // chaseBall = new spawn(x, y, 8, 8);
 
             x = randGen.Next(40, screenSize.Width - 40);
             y = randGen.Next(40, screenSize.Height - 40);
@@ -68,7 +68,9 @@ namespace _2D_Game
             for (int i = 0; i < difficuly; i++)
             {
                 NewBall();
+                NewBall();
             }
+            Refresh();
         }
 
         public void NewBall()
@@ -164,7 +166,7 @@ namespace _2D_Game
 
                     }
                 }
-
+               
 
                 updateSize = false;
             }
@@ -173,7 +175,11 @@ namespace _2D_Game
                 if (updateSize == true)
                 {
                     lives++;
+                    foreach (powerups powers in power)
+                    {
+                        BackColor = Color.White;
 
+                    }
                 }
 
                 updateSize = false;
@@ -220,7 +226,7 @@ namespace _2D_Game
             foreach (spawn b in dodgeBalls)
             {
                 if (b.Collision(hero))
-                {
+                { 
 
                     lives--;
 
@@ -263,22 +269,22 @@ namespace _2D_Game
                         b.ySpeed *= 2;
                     }
                 }
-                Refresh();
-
-            }
+            Refresh();
+           
+        }
         }
 
-            private void gamescreen_Paint(object sender, PaintEventArgs e)
+        private void gamescreen_Paint(object sender, PaintEventArgs e)
+        {
+            points.Text = $"{score}";
+            life.Text = $"{lives}";
+         
+
+            e.Graphics.FillEllipse(Brushes.Green, ball.x, ball.y, ball.size, ball.size);
+            foreach (spawn b in dodgeBalls)
             {
-                points.Text = $"{score}";
-                life.Text = $"{lives}";
-
-
-                e.Graphics.FillEllipse(Brushes.Green, ball.x, ball.y, ball.size, ball.size);
-                foreach (spawn b in dodgeBalls)
-                {
-                    e.Graphics.FillEllipse(Brushes.Purple, b.x, b.y, b.size, b.size);
-                }
+                e.Graphics.FillEllipse(Brushes.Purple, b.x, b.y, b.size, b.size);
+            }
                 foreach (powerups powers in power)
                 {
                     e.Graphics.FillEllipse(Brushes.Blue, powers.x, powers.y, powers.size, powers.size);
@@ -290,11 +296,12 @@ namespace _2D_Game
 
             }
 
-                e.Graphics.FillRectangle(Brushes.DodgerBlue, hero.x, hero.y, hero.width, hero.height);
-
-            }
+            e.Graphics.FillRectangle(Brushes.DodgerBlue, hero.x, hero.y, hero.width, hero.height);
+            
         }
+        
     }
+}
 
 
     

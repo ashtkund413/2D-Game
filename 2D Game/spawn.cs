@@ -43,7 +43,7 @@ namespace _2D_Game
             Rectangle playerRec = new Rectangle(p.x, p.y, p.width, p.height);
 
             if (ballRec.IntersectsWith(playerRec))
-            { 
+            {
                 if (ySpeed > 0)
                 {
                     y = p.y - size;

@@ -23,16 +23,18 @@ namespace _2D_Game
 
         public void Move(Size screenSize)
         {
-           
+            x = xSpeed;
+            y -= ySpeed;
+
             x += XSpeed;
             y += YSpeed;
-
+            
             //check if ball has reached right or left edge
             if (x > screenSize.Width - size || x < 0)
             {
                 XSpeed *= -1; ;
             }
-
+            
             //check if ball has reached right or left edge
             if (y > screenSize.Height - size || y < 0)
             {
@@ -49,7 +51,7 @@ namespace _2D_Game
             Rectangle playerRec = new Rectangle(p.x, p.y, p.width, p.height);
 
             if (powers.IntersectsWith(playerRec))
-            {
+            { 
 
                 if (XSpeed > 0)
                 {
@@ -72,7 +74,7 @@ namespace _2D_Game
                 return true;
                 
             }
-            return false;   
+            return false;
         }
     }
 }
